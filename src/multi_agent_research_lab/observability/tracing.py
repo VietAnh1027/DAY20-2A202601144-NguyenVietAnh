@@ -1,25 +1,24 @@
-"""Tracing hooks.
+"""Tracing hooks for observability."""
 
-This file intentionally avoids binding to one provider. Students can plug in LangSmith,
-Langfuse, OpenTelemetry, or simple JSON traces.
-"""
-
+import logging
 from collections.abc import Iterator
 from contextlib import contextmanager
 from time import perf_counter
 from typing import Any
 
+logger = logging.getLogger(__name__)
+
 
 @contextmanager
 def trace_span(name: str, attributes: dict[str, Any] | None = None) -> Iterator[dict[str, Any]]:
-    """Minimal span context used by the skeleton.
-
-    TODO(student): Replace or augment with LangSmith/Langfuse provider spans.
-    """
+    """Span context for performance monitoring and trace logging."""
 
     started = perf_counter()
     span: dict[str, Any] = {"name": name, "attributes": attributes or {}, "duration_seconds": None}
+    logger.debug(f"[Trace Start] {name} | attributes: {attributes}")
     try:
         yield span
     finally:
-        span["duration_seconds"] = perf_counter() - started
+        duration = perf_counter() - started
+        span["duration_seconds"] = duration
+        logger.debug(f"[Trace End] {name} | duration: {duration:.4f}s")

@@ -95,3 +95,4 @@ Workflow hoạt động theo dạng State Machine (vòng lặp có điều kiệ
   - `Citation Coverage`: Tỷ lệ phần trăm nguồn tài liệu được dẫn chứng `[1]`, `[2]`.
   - `Failure Rate`: Tỷ lệ lỗi nảy sinh trong quá trình chạy.
 - **Expected Outcome**: Multi-Agent Workflow đạt `Quality Score >= 9.0/10` và `Citation Coverage = 100%`, vượt trội so với Single-Agent Baseline.
+
